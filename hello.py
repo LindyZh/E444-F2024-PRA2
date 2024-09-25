@@ -55,7 +55,10 @@ def index():
         if "utoronto" in form.utemail.data:
             session['utemail'] = form.utemail.data
         return redirect(url_for('index'))
-    return render_template('index.html', form = form, name = session.get('name'), utemail = session.get("utemail"), isut = "utoronto" in session.get("utemail"))
+    utemail_ = session.get("utemail")
+    if utemail_ == None:
+        utemail_ = ''
+    return render_template('index.html', form = form, name = session.get('name'), utemail = session.get("utemail"), isut = "utoronto" in utemail_)
 
 @app.route('/user/<name>')
 def user(name):
